@@ -1,0 +1,11 @@
+BootStrap: docker
+From: continuumio/miniconda2:4.7.12
+
+%apprun fastqc
+  exec fastqc "${@}"
+
+%post
+  . /opt/conda/bin/activate && \
+  conda install -q -y \
+    -c bioconda fastqc=0.11.9 && \
+  conda clean -a -q -f -y
